@@ -1,0 +1,555 @@
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+<Show_m>:
+    MDCard:
+        orientation: 'vertical'
+        size_hint: (.5,.3)
+        padding: 20
+        MDLabel:
+            size_hint_y: .8
+            id: lab
+            font_style: "H6"
+        FloatLayout:
+            size_hint_y: .2
+            MDRaisedButton:
+                pos_hint: {"center_x": .90, "center_y": .5}
+                text: "OK!"
+                on_release:
+                    root.dismiss()
+<Point_data>:
+    MDCard:
+        orientation: 'vertical'
+        size_hint: (.7,.6)
+        padding: 20
+        GridLayout:
+            size_hint_y: .8
+            padding: 10
+            spacing: 10
+            cols: 2
+            MDLabel:
+                text: "Exam Point"
+                halign: "center"
+            MDTextFieldRect:
+                id: exam_p
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Tp Point"
+                halign: 'center'
+            MDTextFieldRect:
+                id: tp_p
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Tp Coff"
+                halign: 'center'
+            MDTextFieldRect:
+                id: tp_coff
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Td Point"
+                halign: 'center'
+            MDTextFieldRect:
+                id: td_p
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Td Coff"
+                halign: 'center'
+            MDTextFieldRect:
+                id: td_coff
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Module Coff"
+                halign: 'center'
+            MDTextFieldRect:
+                id: exam_coff
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+        StackLayout:
+            size_hint_y: .2
+            spacing: 10
+            orientation: 'rl-bt'
+            MDRaisedButton:
+                text: "Remove"
+                md_bg_color: .8, 0, 0, 1
+                on_release:
+                    root.remove_item()
+            MDRaisedButton:
+                text: "Cancle"
+                on_release:
+                    root.dismiss()
+            MDRaisedButton:
+                text: "Save"
+                on_release:
+                    root.save_point()
+<Add_point_data>:
+    MDCard:
+        orientation: 'vertical'
+        size_hint: (.7,.6)
+        padding: 20
+        GridLayout:
+            size_hint_y: .8
+            padding: 10
+            spacing: 10
+            cols: 2
+            MDLabel:
+                text: "Exam Point"
+                halign: "center"
+            MDTextFieldRect:
+                id: exam_p
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Tp Point"
+                halign: 'center'
+            MDTextFieldRect:
+                id: tp_p
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Tp Coff"
+                halign: 'center'
+            MDTextFieldRect:
+                id: tp_coff
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Td Point"
+                halign: 'center'
+            MDTextFieldRect:
+                id: td_p
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Td Coff"
+                halign: 'center'
+            MDTextFieldRect:
+                id: td_coff
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+            MDLabel:
+                text: "Module Coff"
+                halign: 'center'
+            MDTextFieldRect:
+                id: moudle_coff
+                halign: 'center'
+                input_filter: 'float'
+                multiline: False
+        StackLayout:
+            size_hint_y: .2
+            spacing: 10
+            orientation: 'rl-bt'
+            MDRaisedButton:
+                text: "Add"
+                md_bg_color: 0, .8, 0, 1
+                on_release:
+                    root.add_point(exam_p.text,tp_p.text,tp_coff.text\
+                    ,td_p.text,td_coff.text,moudle_coff.text)
+                    exam_p.text = ""
+                    tp_p.text = ""
+                    tp_coff.text = ""
+                    td_p.text = ""
+                    td_coff.text = ""
+                    moudle_coff.text = "" 
+            MDRaisedButton:
+                text: "Cancle"
+                on_release:
+                    root.dismiss()
+<ST@BoxLayout>:
+    spacing: 20
+    canvas:
+        Color:
+            rgba: 0, .4, .9, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    MDLabel:
+        halign: "center"
+        text: "Exam"
+    MDLabel:
+        halign: "center"
+        text: "TP"
+    MDLabel:
+        halign: "center"
+        text: "TP coff"
+    MDLabel:
+        halign: "center"
+        text: "TD"
+    MDLabel:
+        halign: "center"
+        text: "TD coff"
+    MDLabel:
+        halign: "center"
+        text: "Exam Coff"
+<HybridListBaseItme>:
+    size_hint_y: None
+    canvas:
+        Color:
+            id: acolor
+            rgba: (0, 0, 0, 0)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        pos: root.pos
+        MDLabel:
+            id: exam_p
+            halign: "center"
+            pos: root.pos
+        MDLabel:
+            id: tp_p
+            halign: "center"
+            pos: root.pos
+        MDLabel:
+            id: tp_coff
+            halign: "center"
+            pos: root.pos
+        MDLabel:
+            id: td_p
+            halign: "center"
+            pos: root.pos
+        MDLabel:
+            id: td_coff
+            halign: "center"
+            pos: root.pos
+        MDLabel:
+            id: exam_coff
+            halign: "center"
+            pos: root.pos  
+<Calculator>:
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: "Calculate the rate"
+            elevation: 10
+            left_action_items: [['menu', lambda x: root.parent.nav_drawer.set_state()]]
+        BoxLayout:
+            orientation: 'vertical'
+            ST:
+                size_hint_y: .1
+            ScrollView:
+                do_scroll_x: False
+                size_hint_y: .8
+                MDList:
+                    id: points_list
+            FloatLayout:
+                size_hint_y: .1
+                canvas:
+                    Color:
+                        rgba: app.theme_cls.primary_color
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                MDRaisedButton:
+                    text: "Add"
+                    md_bg_color: 0, .8, 0, 1
+                    pos_hint: {"center_x": .20, "center_y": .5}
+                    on_release:
+                        root.add_point_data.open()
+                MDRaisedButton:
+                    text: "Calculate"
+                    md_bg_color: 0, 0, .9, 1
+                    pos_hint: {"center_x": .40, "center_y": .5}
+                    on_release:
+                        root.Calculate()
+                MDRaisedButton:
+                    text: "Export(.xls)"
+                    md_bg_color: 0, 0, .9, 1
+                    pos_hint: {"center_x": .60, "center_y": .5}
+                    on_release:
+                        root.save_as_xlsx()
+                MDRaisedButton:
+                    text: "Close"
+                    md_bg_color: 0, 0, .9, 1
+                    pos_hint: {"center_x": .80, "center_y": .5}
+                    on_release:
+                        app.get_running_app().stop()
+
+<Item_data>:
+    MDCard:
+        orientation: 'vertical'
+        size_hint: (.7,.4)
+        padding: 20
+        spacing: 20
+        MDLabel:
+            id: title
+            size_hint_y: .2
+            font_style: "H6"
+        MDLabel:
+            id: time_set
+            size_hint_y: .1
+            theme_text_color: "Secondary"
+        MDLabel:
+            id: description
+            size_hint_y: .5
+        StackLayout:
+            size_hint_y: .2
+            spacing: 10
+            orientation: 'tb-rl'
+            MDRaisedButton:
+                text: "Remove"
+                md_bg_color: 1, 0, 0, 1
+                on_release:
+                    root.remove_item()
+            MDRaisedButton:
+                text: "Cancle"
+                on_release:
+                    root.dismiss()
+<Add_Note_Dialog>:
+    MDCard:
+        orientation: 'vertical'
+        size_hint: (.8,.5)
+        MDLabel:
+            text: "Add Note :"
+            size_hint_y: .2
+            font_style: "H6"
+            padding: (10,40)
+        GridLayout:
+            size_hint_y: .6
+            padding: 10
+            spacing: 10
+            cols: 2
+            MDLabel:
+                text: "Title"
+                size_hint_y: .20
+            MDTextFieldRect:
+                id: title
+                size_hint_y: .20
+                multiline: False
+            MDLabel:
+                text: "Descreption"
+                size_hint_y: .80
+            MDTextFieldRect:
+                id: descreption
+                size_hint_y: .80 
+        StackLayout:
+            size_hint_y: .2
+            orientation: 'rl-bt'
+            padding: 15
+            spacing: 15
+            MDRaisedButton:
+                text: "Add"
+                md_bg_color: 0, .6, 0, 1
+                on_release:
+                    root.add_note(title.text,descreption.text)
+                    title.text = ''
+                    descreption.text = ''
+            MDRaisedButton:
+                text: "Cancle"
+                on_release:
+                    root.dismiss()
+
+                
+<Todo>:
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: "Todo"
+            elevation: 10
+            left_action_items: [['menu', lambda x: root.parent.nav_drawer.set_state()]]
+
+        BoxLayout:
+            orientation: 'vertical'
+            ScrollView:
+                do_scroll_x: False
+                size_hint_y: .8
+                MDList:
+                    id: todolist
+            AnchorLayout:
+                size_hint_y: .2
+                padding: 40
+                anchor_x: 'right'
+                MDFloatingActionButton:
+                    icon: "plus"
+                    elevation_normal: 8
+                    on_release:
+                        root.add_note_dia.open()
+<Node>:
+    canvas:
+        Color:
+            rgba: 1, .2, .3, .8
+        Ellipse:
+            pos: root.pos
+            size: root.size
+    AnchorLayout:
+        pos: root.pos
+        MDLabel:
+            id: Lab
+            halign: "center"
+            text: "Select To Edit"
+<MindMap>:
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: "Mind Map"
+            elevation: 10
+            left_action_items: [['menu', lambda x: root.parent.nav_drawer.set_state()]]
+        FloatLayout:
+            id: Info_Bar
+            size_hint_y: .1
+            canvas:
+                Color:
+                    rgba: (.0, .5, .5,.7)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            MDLabel:
+                text: "Text :"
+                halign: "center"
+                size_hint: (.1, .5)
+                pos_hint: {"center_x": .1, "center_y": .5}
+            MDTextFieldRect:
+                id: text_inp
+                halign: "center"
+                multiline: False
+                size_hint: (.2, .5)
+                pos_hint: {"center_x": .25, "center_y": .5}
+            MDLabel:
+                text: "Size :"
+                halign: "center"
+                size_hint: (.1, .5)
+                pos_hint: {"center_x": .4, "center_y": .5}
+            MDTextFieldRect:
+                id: size_inp
+                halign: "center"
+                multiline: False
+                size_hint: (.1, .5)
+                pos_hint: {"center_x": .50, "center_y": .5}
+            MDLabel:
+                text: "Color :"
+                halign: "center"
+                size_hint: (.1, .5)
+                pos_hint: {"center_x": .60, "center_y": .5}
+            MDTextFieldRect:
+                id: color_inp
+                halign: "center"
+                multiline: False
+                size_hint: (.2, .5)
+                pos_hint: {"center_x": .75, "center_y": .5}
+            MDRaisedButton:
+                pos_hint: {"center_x": .93, "center_y": .5}
+                text: "Change !"
+                size_hint: (.1, .5)
+                on_release:
+                    root.Update()
+        BoxLayout:
+            size_hint_y: .8
+            BoxLayout:
+                size_hint_x: .1
+                orientation: 'vertical'
+                canvas:
+                    Color:
+                        rgb: (0, .5, .5)
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                FloatLayout:
+                    MDRaisedButton:
+                        pos_hint: {"center_x": .5, "center_y": .9}
+                        text: "Root Node"
+                        size_hint: (.85, .1)
+                        on_release:
+                            root.Add_root_node()
+                    MDRaisedButton:
+                        pos_hint: {"center_x": .5, "center_y": .7}
+                        text: "Child Node"
+                        size_hint: (.85, .1)
+                        on_release:
+                            root.Add_child_node()
+                    MDRaisedButton:
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        text: "Clear"
+                        size_hint: (.85, .1)
+                        on_release:
+                            root.Clear()
+                    MDRaisedButton:
+                        pos_hint: {"center_x": .5, "center_y": .3}
+                        text: "Save"
+                        size_hint: (.85, .1)
+                        on_release:
+                            node_scene.export_to_png("MindMap.png")
+                    MDRaisedButton:
+                        pos_hint: {"center_x": .5, "center_y": .1}
+                        text: "Close"
+                        size_hint: (.85, .1)
+                        on_release:
+                            app.get_running_app().stop()
+            RelativeLayout:
+                id: node_scene
+                size_hint_x: .9
+Screen:
+
+    NavigationLayout:
+        
+        ScreenManager:
+            id: sm
+            transition: NoTransition()
+            nav_drawer: nav_drawer
+            Calculator:
+                name: "caluc"
+            Todo: 
+                name: "todo"
+                on_kv_post:
+                    self.load_todo_list()
+            MindMap:
+                name: 'mind_map'
+        MDNavigationDrawer:
+            id: nav_drawer
+            orientation: "vertical"
+            padding: "8dp"
+            spacing: "8dp"
+            AnchorLayout:
+                size_hint_y: None
+                height: avatar.height
+                Image:
+                    id: avatar
+                    size: "156dp", "156dp"
+                    source: "assest/edc2.png"
+            ScrollView:
+                MDList:
+                    id: md_list
+                    OneLineIconListItem:
+                        text: "Calculator"
+                        on_release:
+                            sm.current = "caluc"
+                            nav_drawer.set_state()
+                        IconLeftWidget:
+                            icon: "calculator"
+                    OneLineIconListItem:
+                        text: "Todo List"
+                        on_release:
+                            sm.current = "todo"
+                            nav_drawer.set_state()
+                        IconLeftWidget:
+                            icon: "format-list-checks"
+                    OneLineIconListItem:
+                        text: "Mind Map"
+                        on_release:
+                            sm.current = "mind_map"
+                            nav_drawer.set_state()
+                        IconLeftWidget:
+                            icon: "brain"
+            AnchorLayout:
+                anchor_y: "bottom"
+                MDRaisedButton:
+                    id: close
+                    text: "Close"
+                    on_release:
+                        app.get_running_app().stop()
+                    
+
